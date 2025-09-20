@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: poll-service
+  namespace: minipolls
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: poll-service
+  template:
+    metadata:
+      labels:
+        app: poll-service
+    spec:
+      containers:
+        - name: poll-service
+          image: shreeyakalidindi/poll-service:1.0.0
+          envFrom:
+            - secretRef:
+                name: db-secret
+          ports:
+            - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: poll-service
+  namespace: minipolls
+spec:
+  type: ClusterIP
+  selector:
+    app: poll-service
+  ports:
+    - port: 8080
+      targetPort: 8080

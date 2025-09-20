@@ -1,0 +1,17 @@
+# dotenv
+.env
+
+# Node
+poll-service/node_modules
+npm-debug.log
+
+# Python
+__pycache__/
+*.pyc
+
+# Docker artifacts
+*.local
+*.log
+
+# Mac
+.DS_Store
